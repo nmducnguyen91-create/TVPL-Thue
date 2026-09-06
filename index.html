@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:#F2F0EA;overflow-x:hidden}
+  *{box-sizing:border-box}
+  a{color:#8F2A23;text-decoration:none;border-bottom:1px solid rgba(143,42,35,.3)}
+  a:hover{color:#6E1F19;border-bottom-color:#6E1F19}
+  mark{background:#FBE9A0;color:#16202B;border-radius:2px;padding:0 1px}
+  input,textarea,select,button{font-family:inherit}
+  input::placeholder,textarea::placeholder{color:#9AA4AD}
+  table{width:100%;border-collapse:collapse}
+  @media print{ .noprint{display:none!important} body{background:#fff} }
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F2F0EA;color:#16202B;font-family:'Be Vietnam Pro',system-ui,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased">
+<div style="max-width:1120px;margin:0 auto;padding:0 clamp(12px,3vw,20px) 88px">
+
+  <header style="display:grid;gap:clamp(14px,2.5vw,20px);background:#FFFFFF;border:1px solid #E4E1D8;border-top:3px solid #8F2A23;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.05),0 10px 28px rgba(22,32,43,.05);margin-top:clamp(14px,3vw,24px);padding:clamp(18px,3.5vw,26px)">
+    <div style="display:grid;gap:7px">
+      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#8F2A23">Thư viện pháp luật thuế · tra cứu &amp; học tập</p>
+      <h1 style="margin:0;font-family:Lora,Georgia,serif;font-weight:700;font-size:clamp(22px,5.4vw,31px);line-height:1.2;letter-spacing:-.01em;text-wrap:pretty">Bộ pháp luật Quản lý thuế 2025&ndash;2026</h1>
+      <p style="margin:0;font-family:Lora,Georgia,serif;font-style:italic;font-size:clamp(14.5px,2.6vw,16.5px);color:#55636F;text-wrap:pretty">Luật Quản lý thuế 108/2025 cùng toàn bộ nghị định, thông tư và văn bản hợp nhất hướng dẫn</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:7px">
+      <span style="display:inline-flex;align-items:baseline;gap:5px;font-size:12.5px;font-weight:500;color:#55636F;background:#F7F6F1;border:1px solid #E4E1D8;border-radius:999px;padding:5px 12px"><b style="color:#8F2A23;font-weight:700">{{ docCount }}</b> văn bản</span>
+      <span style="display:inline-flex;align-items:baseline;gap:5px;font-size:12.5px;font-weight:500;color:#55636F;background:#F7F6F1;border:1px solid #E4E1D8;border-radius:999px;padding:5px 12px"><b style="color:#8F2A23;font-weight:700">{{ artCount }}</b> điều toàn văn</span>
+      <span style="display:inline-flex;align-items:baseline;gap:5px;font-size:12.5px;font-weight:500;color:#55636F;background:#F7F6F1;border:1px solid #E4E1D8;border-radius:999px;padding:5px 12px">Luật · Nghị định · Thông tư · Hợp nhất</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px dashed #E4E1D8;padding-top:clamp(12px,2.5vw,18px)">
+      <span style="display:grid;gap:1px;background:#8F2A23;color:#fff;border-radius:4px;padding:7px 14px"><b style="font-size:15px;font-weight:700">01/7/2026</b><small style="font-size:10px;font-weight:500;letter-spacing:.1em;opacity:.88">NGÀY HIỆU LỰC</small></span>
+      <span style="font-size:13px;color:#55636F;max-width:640px">Quản lý thuế · Thuế TNCN · Hóa đơn điện tử · Giao dịch liên kết · Xử phạt VPHC</span>
+    </div>
+  </header>
+
+  <div class="noprint" style="position:sticky;top:0;z-index:40;background:rgba(242,240,234,.94);backdrop-filter:blur(10px);padding:12px 0 4px;margin-top:16px">
+    <div style="position:relative">
+      <span style="position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:15px;color:#8B96A1">&#128269;</span>
+      <input type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="Tìm nội dung, số điều, biểu mẫu… (không dấu cũng được)" aria-label="Tìm kiếm toàn văn" style="width:100%;font-size:16px;color:#16202B;padding:13px 44px 13px 40px;border:1.5px solid #D6D2C7;border-radius:4px;background:#fff;outline:none" style-focus="border-color:#16202B">
+      <sc-if value="{{ searching }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ onClear }}" aria-label="Xóa" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);border:none;background:none;color:#8B96A1;font-size:24px;cursor:pointer;padding:6px 12px;line-height:1">&times;</button>
+      </sc-if>
+    </div>
+    <div role="tablist" style="display:flex;gap:2px;margin-top:8px;overflow-x:auto;scrollbar-width:none">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="6">
+        <button type="button" role="tab" onClick="{{ t.go }}" style="{{ t.sty }}" style-hover="color:#16202B">{{ t.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <sc-if value="{{ searching }}" hint-placeholder-val="{{ false }}">
+    <section>
+      <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:22px 0 12px;overflow-wrap:anywhere">Kết quả cho &ldquo;{{ q }}&rdquo; <span style="font-family:'Be Vietnam Pro',sans-serif;font-weight:400;color:#8B96A1;font-size:14px">({{ hitCount }})</span></h2>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px">
+        <sc-for list="{{ sfChips }}" as="c" hint-placeholder-count="4">
+          <button type="button" onClick="{{ c.go }}" style="{{ c.sty }}">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ searchLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:13.5px;color:#8B96A1;background:#fff;border:1px solid #E4E1D8;border-radius:4px;padding:11px 14px;margin-bottom:12px">{{ loadNote }}</div>
+      </sc-if>
+      <sc-for list="{{ results }}" as="g" hint-placeholder-count="2">
+        <div>
+          <div style="font-family:Lora,Georgia,serif;font-size:13.5px;font-weight:700;color:#8F2A23;margin:20px 0 9px;overflow-wrap:anywhere">{{ g.title }}</div>
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+            <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);padding:14px 16px;margin-bottom:9px;overflow-wrap:anywhere">
+              <div style="font-weight:600;font-size:15px;line-height:1.5">{{ it.head }}</div>
+              <div style="font-size:14.5px;color:#55636F;margin-top:8px;line-height:1.62">{{ it.body }}</div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ g.more }}" hint-placeholder-val="{{ false }}">
+            <button type="button" onClick="{{ g.onMore }}" style="font-size:13.5px;font-weight:600;color:#16202B;background:#fff;border:1px solid #D6D2C7;border-radius:4px;padding:10px 15px;cursor:pointer;margin-bottom:6px" style-hover="border-color:#16202B">{{ g.moreLabel }}</button>
+          </sc-if>
+        </div>
+      </sc-for>
+      <sc-if value="{{ noHits }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;color:#8B96A1;padding:44px 18px;font-size:15px;background:#fff;border:1px solid #E4E1D8;border-radius:4px"><b style="color:#16202B">Không tìm thấy.</b><br>Thử từ khóa ngắn hơn, số điều (<b style="color:#16202B">Điều 41</b>), mẫu (<b style="color:#16202B">04/SS</b>) hoặc chủ đề (<b style="color:#16202B">ủy nhiệm</b>, <b style="color:#16202B">đặt cọc</b>).</div>
+      </sc-if>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ onLib }}" hint-placeholder-val="{{ true }}">
+    <section>
+      <sc-if value="{{ noDoc }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:22px 0 6px">Thư viện toàn văn</h2>
+          <p style="color:#55636F;font-size:14.5px;margin:0 0 16px;max-width:720px">Chọn một văn bản để đọc theo chương &ndash; điều. Toàn văn chỉ nạp khi bạn mở, nên trang mở nhanh cả trên điện thoại.</p>
+          <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+            <div>
+              <div style="font-family:Lora,Georgia,serif;font-size:12.5px;font-weight:700;color:#8F2A23;text-transform:uppercase;letter-spacing:.1em;margin:20px 0 9px">{{ g.kind }}</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:9px">
+                <sc-for list="{{ g.docs }}" as="d" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ d.open }}" style="display:grid;gap:4px;text-align:left;background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);padding:14px 15px;cursor:pointer;transition:border-color .15s,transform .15s" style-hover="border-color:#B9B3A4;transform:translateY(-1px)">
+                    <span style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><span style="font-family:Lora,Georgia,serif;font-weight:700;font-size:15.5px;color:#16202B">{{ d.sohieu }}</span><span style="{{ d.badgeSty }}">{{ d.badge }}</span></span>
+                    <span style="font-size:13.5px;color:#55636F;line-height:1.45">{{ d.title }}</span>
+                    <span style="font-size:12px;color:#8B96A1">{{ d.meta }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ hasDoc }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <button type="button" onClick="{{ backToList }}" style="border:none;background:none;color:#8F2A23;font-weight:600;font-size:14px;cursor:pointer;padding:18px 0 8px">&larr; Danh sách văn bản</button>
+          <div style="font-family:Lora,Georgia,serif;font-size:clamp(19px,4.4vw,23px);font-weight:700;line-height:1.25">{{ cur.sohieu }}</div>
+          <div style="font-size:14.5px;color:#55636F;margin-top:3px">{{ cur.title }}</div>
+          <div style="font-size:12.5px;color:#8B96A1;margin:8px 0 14px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+            <span>{{ cur.meta }}</span>
+            <sc-if value="{{ cur.hasUrl }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ cur.url }}" target="_blank" rel="noopener">Mở nguồn &#8599;</a>
+            </sc-if>
+          </div>
+          <sc-if value="{{ cur.showChips }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px">
+              <sc-for list="{{ situChips }}" as="c" hint-placeholder-count="6">
+                <button type="button" onClick="{{ c.go }}" style="{{ c.sty }}">{{ c.label }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ cur.loading }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:14px;color:#8B96A1;background:#fff;border:1px solid #E4E1D8;border-radius:4px;padding:28px 18px;text-align:center">Đang nạp toàn văn…</div>
+          </sc-if>
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+            <div>
+              <sc-if value="{{ r.isChap }}" hint-placeholder-val="{{ false }}">
+                <div style="font-family:Lora,Georgia,serif;font-size:12.5px;font-weight:700;color:#8F2A23;text-transform:uppercase;letter-spacing:.08em;margin:22px 0 9px;line-height:1.4">{{ r.label }}</div>
+              </sc-if>
+              <sc-if value="{{ r.isArt }}" hint-placeholder-val="{{ true }}">
+                <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);margin-bottom:8px;overflow:hidden">
+                  <button type="button" onClick="{{ r.toggle }}" style="width:100%;display:grid;gap:5px;text-align:left;background:#fff;border:none;cursor:pointer;padding:14px 44px 14px 15px;position:relative;color:#16202B;min-height:52px">
+                    <span style="font-family:Lora,Georgia,serif;font-weight:600;font-size:15.5px;line-height:1.4;overflow-wrap:anywhere">{{ r.label }}</span>
+                    <sc-if value="{{ r.hasTags }}" hint-placeholder-val="{{ false }}">
+                      <span style="display:flex;flex-wrap:wrap;gap:4px">
+                        <sc-for list="{{ r.tags }}" as="tg" hint-placeholder-count="2">
+                          <span style="font-size:11px;font-weight:600;color:#1D6152;background:#E7F1EC;border:1px solid #CFE3DA;border-radius:3px;padding:1px 7px">{{ tg }}</span>
+                        </sc-for>
+                      </span>
+                    </sc-if>
+                    <span style="position:absolute;right:15px;top:14px;font-size:19px;color:#8B96A1;font-weight:400">{{ r.sign }}</span>
+                  </button>
+                  <sc-if value="{{ r.open }}" hint-placeholder-val="{{ false }}">
+                    <div style="border-top:1px solid #E4E1D8;padding:11px 15px 15px;font-size:14.5px;line-height:1.68;color:#2B3744;overflow-wrap:anywhere">{{ r.body }}</div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ onSrc }}" hint-placeholder-val="{{ false }}">
+    <section>
+      <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:22px 0 6px">Nguồn văn bản</h2>
+      <p style="color:#55636F;font-size:14.5px;margin:0 0 14px;max-width:760px">Sửa số hiệu, tên, link nguồn, ngày hiệu lực, trạng thái và chuỗi sửa đổi của từng văn bản; đánh dấu ngày đã đối chiếu bản gốc; hoặc thêm văn bản mới bằng cách dán toàn văn. Thay đổi lưu trên máy bạn.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+        <button type="button" onClick="{{ onAdd }}" style="font-size:13.5px;font-weight:600;color:#fff;background:#16202B;border:1px solid #16202B;border-radius:4px;padding:10px 15px;cursor:pointer" style-hover="background:#243342">+ Thêm văn bản</button>
+        <button type="button" onClick="{{ onExport }}" style="font-size:13.5px;font-weight:600;color:#16202B;background:#fff;border:1px solid #D6D2C7;border-radius:4px;padding:10px 15px;cursor:pointer" style-hover="border-color:#16202B">Xuất cập nhật (.json)</button>
+        <button type="button" onClick="{{ onImport }}" style="font-size:13.5px;font-weight:600;color:#16202B;background:#fff;border:1px solid #D6D2C7;border-radius:4px;padding:10px 15px;cursor:pointer" style-hover="border-color:#16202B">Nhập từ .json</button>
+        <button type="button" onClick="{{ onResetAll }}" style="font-size:13.5px;font-weight:600;color:#8F2A23;background:#fff;border:1px solid #E9CFCC;border-radius:4px;padding:10px 15px;cursor:pointer" style-hover="background:#FBF1F0">Hoàn nguyên tất cả</button>
+      </div>
+      <sc-if value="{{ hasMsg }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:13.5px;color:#1D6152;background:#E7F1EC;border:1px solid #CFE3DA;border-radius:4px;padding:10px 14px;margin-bottom:12px">{{ msg }}</div>
+      </sc-if>
+
+      <sc-if value="{{ adding }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border:1px solid #D6D2C7;border-left:3px solid #16202B;border-radius:4px;padding:clamp(14px,3vw,18px);margin-bottom:14px;display:grid;gap:12px">
+          <div style="font-family:Lora,Georgia,serif;font-size:16.5px;font-weight:700">Thêm văn bản mới</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px">
+            <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Số hiệu
+              <input value="{{ nf.sohieu }}" onChange="{{ nfH.sohieu }}" placeholder="NĐ 300/2027/NĐ-CP" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+            </label>
+            <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Loại văn bản
+              <select value="{{ nf.kind }}" onChange="{{ nfH.kind }}" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;background:#fff;font-weight:400;text-transform:none;letter-spacing:0">
+                <option>Luật</option><option>Nghị định</option><option>Thông tư</option><option>Văn bản hợp nhất</option><option>Văn bản khác</option>
+              </select>
+            </label>
+            <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Ngày hiệu lực
+              <input value="{{ nf.eff }}" onChange="{{ nfH.eff }}" placeholder="01/01/2027" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+            </label>
+            <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Trạng thái
+              <select value="{{ nf.status }}" onChange="{{ nfH.status }}" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;background:#fff;font-weight:400;text-transform:none;letter-spacing:0">
+                <option>Còn hiệu lực</option><option>Chưa hiệu lực</option><option>Hết hiệu lực</option><option>Dự thảo</option>
+              </select>
+            </label>
+          </div>
+          <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Tên văn bản
+            <input value="{{ nf.title }}" onChange="{{ nfH.title }}" placeholder="Quy định chi tiết về…" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+          </label>
+          <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Link nguồn
+            <input value="{{ nf.url }}" onChange="{{ nfH.url }}" placeholder="https://…" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+          </label>
+          <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Toàn văn &mdash; dán vào đây, mỗi điều bắt đầu bằng &ldquo;Điều 1.&rdquo;
+            <textarea value="{{ nf.text }}" onChange="{{ nfH.text }}" rows="8" placeholder="Điều 1. Phạm vi điều chỉnh&#10;1. …&#10;&#10;Điều 2. Đối tượng áp dụng&#10;…" style="font-size:16px;line-height:1.6;color:#16202B;padding:11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;resize:vertical;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B"></textarea>
+          </label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button type="button" onClick="{{ onAddSave }}" style="font-size:13.5px;font-weight:600;color:#fff;background:#1D6152;border:none;border-radius:4px;padding:11px 17px;cursor:pointer">Lưu văn bản</button>
+            <button type="button" onClick="{{ onAddCancel }}" style="font-size:13.5px;font-weight:600;color:#55636F;background:#fff;border:1px solid #D6D2C7;border-radius:4px;padding:11px 17px;cursor:pointer">Hủy</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-for list="{{ srcRows }}" as="row" hint-placeholder-count="6">
+        <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);margin-bottom:9px;padding:15px 16px">
+          <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start">
+            <div style="flex:1 1 260px;min-width:0;display:grid;gap:4px">
+              <div style="display:flex;align-items:center;gap:7px;flex-wrap:wrap">
+                <span style="font-family:Lora,Georgia,serif;font-weight:700;font-size:16px">{{ row.sohieu }}</span>
+                <span style="{{ row.badgeSty }}">{{ row.badge }}</span>
+                <sc-if value="{{ row.edited }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:11px;font-weight:600;color:#9A7A2E;background:#FAF4E4;border:1px solid #EADFC0;border-radius:3px;padding:1px 7px">đã sửa</span>
+                </sc-if>
+                <sc-if value="{{ row.custom }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:11px;font-weight:600;color:#1D6152;background:#E7F1EC;border:1px solid #CFE3DA;border-radius:3px;padding:1px 7px">tự thêm</span>
+                </sc-if>
+              </div>
+              <div style="font-size:14px;color:#55636F;line-height:1.45">{{ row.title }}</div>
+              <div style="font-size:12.5px;color:#8B96A1;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+                <span>Hiệu lực {{ row.eff }} · {{ row.meta }}</span>
+                <sc-if value="{{ row.hasUrl }}" hint-placeholder-val="{{ true }}">
+                  <a href="{{ row.url }}" target="_blank" rel="noopener">Mở nguồn &#8599;</a>
+                </sc-if>
+              </div>
+              <div style="font-size:12.5px;color:#8B96A1">{{ row.checkedLabel }}</div>
+              <sc-if value="{{ row.hasAmended }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12.5px;font-weight:600;color:#8F2A23">Sửa đổi / thay thế bởi: {{ row.amendedBy }}</div>
+              </sc-if>
+              <sc-if value="{{ row.hasNote }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;color:#2B3744;background:#F7F6F1;border-left:2px solid #D6D2C7;padding:7px 11px;margin-top:4px">{{ row.note }}</div>
+              </sc-if>
+            </div>
+            <div class="noprint" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              <button type="button" onClick="{{ row.onEdit }}" style="font-size:13px;font-weight:600;color:#16202B;background:#fff;border:1px solid #D6D2C7;border-radius:4px;padding:9px 13px;cursor:pointer" style-hover="border-color:#16202B">{{ row.editLabel }}</button>
+              <button type="button" onClick="{{ row.onCheck }}" style="font-size:13px;font-weight:600;color:#1D6152;background:#fff;border:1px solid #CFE3DA;border-radius:4px;padding:9px 13px;cursor:pointer" style-hover="background:#E7F1EC">Đã đối chiếu hôm nay</button>
+              <button type="button" onClick="{{ row.onSecond }}" style="font-size:13px;font-weight:600;color:#8F2A23;background:#fff;border:1px solid #E9CFCC;border-radius:4px;padding:9px 13px;cursor:pointer" style-hover="background:#FBF1F0">{{ row.secondLabel }}</button>
+            </div>
+          </div>
+          <sc-if value="{{ row.editing }}" hint-placeholder-val="{{ false }}">
+            <div style="border-top:1px dashed #E4E1D8;margin-top:13px;padding-top:13px;display:grid;gap:11px">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:11px">
+                <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Số hiệu
+                  <input value="{{ ef.sohieu }}" onChange="{{ efH.sohieu }}" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+                </label>
+                <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Ngày hiệu lực
+                  <input value="{{ ef.eff }}" onChange="{{ efH.eff }}" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+                </label>
+                <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Trạng thái
+                  <select value="{{ ef.status }}" onChange="{{ efH.status }}" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;background:#fff;font-weight:400;text-transform:none;letter-spacing:0">
+                    <option>Còn hiệu lực</option><option>Chưa hiệu lực</option><option>Hết hiệu lực</option><option>Dự thảo</option>
+                  </select>
+                </label>
+              </div>
+              <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Tên văn bản
+                <input value="{{ ef.title }}" onChange="{{ efH.title }}" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+              </label>
+              <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Link nguồn
+                <input value="{{ ef.url }}" onChange="{{ efH.url }}" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+              </label>
+              <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Sửa đổi / thay thế bởi
+                <input value="{{ ef.amendedBy }}" onChange="{{ efH.amendedBy }}" placeholder="VD: NĐ 300/2027/NĐ-CP — từ 01/01/2028" style="font-size:16px;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B">
+              </label>
+              <label style="display:grid;gap:5px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#8B96A1">Ghi chú cập nhật
+                <textarea value="{{ ef.note }}" onChange="{{ efH.note }}" rows="2" placeholder="Ví dụ: đã đối chiếu bản gốc ngày…" style="font-size:16px;line-height:1.6;color:#16202B;padding:10px 11px;border:1px solid #D6D2C7;border-radius:4px;outline:none;resize:vertical;font-weight:400;text-transform:none;letter-spacing:0" style-focus="border-color:#16202B"></textarea>
+              </label>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button type="button" onClick="{{ onEditSave }}" style="font-size:13.5px;font-weight:600;color:#fff;background:#1D6152;border:none;border-radius:4px;padding:11px 17px;cursor:pointer">Lưu thay đổi</button>
+                <button type="button" onClick="{{ onEditCancel }}" style="font-size:13.5px;font-weight:600;color:#55636F;background:#fff;border:1px solid #D6D2C7;border-radius:4px;padding:11px 17px;cursor:pointer">Hủy</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ onTQ }}" hint-placeholder-val="{{ false }}">
+    <section>
+      <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:22px 0 12px">Bức tranh tổng thể</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:10px">
+        <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);padding:15px 16px">
+          <div style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8B96A1">Cơ sở pháp lý</div>
+          <div style="font-family:Lora,Georgia,serif;font-size:19px;font-weight:700;margin-top:4px">Luật 108/2025/QH15</div>
+          <div style="font-size:13.5px;color:#55636F;margin-top:6px">Khoản 6 Điều 26, khoản 4 Điều 27, khoản 5 Điều 52 giao Chính phủ &amp; Bộ Tài chính quy định chi tiết.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);padding:15px 16px">
+          <div style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8B96A1">Ngày hiệu lực</div>
+          <div style="font-family:Lora,Georgia,serif;font-size:19px;font-weight:700;margin-top:4px">01/7/2026</div>
+          <div style="font-size:13.5px;color:#55636F;margin-top:6px">Mọi hóa đơn, chứng từ lập từ thời điểm này phải theo quy định mới.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);padding:15px 16px">
+          <div style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8B96A1">Nghị định 254/2026/NĐ-CP</div>
+          <div style="font-family:Lora,Georgia,serif;font-size:19px;font-weight:700;margin-top:4px">5 chương · 45 điều</div>
+          <div style="font-size:13.5px;color:#55636F;margin-top:6px">Kèm 01 Phụ lục về nội dung hóa đơn. Ban hành 30/6/2026.</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);padding:15px 16px">
+          <div style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#8B96A1">Thông tư 91/2026/TT-BTC</div>
+          <div style="font-family:Lora,Georgia,serif;font-size:19px;font-weight:700;margin-top:4px">5 chương · 25 điều</div>
+          <div style="font-size:13.5px;color:#55636F;margin-top:6px">Kèm 05 Phụ lục (I&ndash;IV bắt buộc, V tham khảo). Ban hành 30/6/2026.</div>
+        </div>
+      </div>
+
+      <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:28px 0 12px">Kết cấu hai văn bản</h2>
+      <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);overflow-x:auto">
+        <table style="font-size:13.5px;min-width:480px">
+          <thead><tr><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px;font-weight:700">Nghị định 254/2026/NĐ-CP</th><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px;font-weight:700">Thông tư 91/2026/TT-BTC</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chương I. Quy định chung (Điều 1&ndash;5)</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chương I. Quy định chung (Điều 1&ndash;2)</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chương II. Hóa đơn điện tử (Điều 6&ndash;21)</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chương II. Hóa đơn điện tử (Điều 3&ndash;15)</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chương III. Chứng từ điện tử (Điều 22&ndash;30)</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chương III. Chứng từ điện tử (Điều 16&ndash;20)</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chương IV. Xây dựng, tra cứu thông tin (Điều 31&ndash;42)</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chương IV. Tra cứu, cung cấp, sử dụng thông tin (Điều 21&ndash;23)</td></tr>
+            <tr><td style="padding:11px 14px;vertical-align:top">Chương V. Điều khoản thi hành (Điều 43&ndash;45)</td><td style="padding:11px 14px;vertical-align:top">Chương V. Điều khoản thi hành (Điều 24&ndash;25)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:28px 0 12px">Mốc chuyển tiếp cần nhớ</h2>
+      <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);padding:6px 16px 12px">
+        <div style="display:grid">
+          <div style="display:grid;gap:2px;padding:13px 0 13px 24px;border-bottom:1px solid #E4E1D8;position:relative">
+            <span style="position:absolute;left:2px;top:19px;width:9px;height:9px;border-radius:50%;background:#8F2A23"></span>
+            <span style="font-weight:700;font-size:13.5px">30/6/2026</span><span style="font-size:13.5px;color:#55636F">Chính phủ ban hành NĐ 254; Bộ Tài chính ban hành TT 91 (cùng ngày).</span>
+          </div>
+          <div style="display:grid;gap:2px;padding:13px 0 13px 24px;border-bottom:1px solid #E4E1D8;position:relative">
+            <span style="position:absolute;left:2px;top:19px;width:9px;height:9px;border-radius:50%;background:#8F2A23"></span>
+            <span style="font-weight:700;font-size:13.5px">Từ 01/7/2026 — hiệu lực</span><span style="font-size:13.5px;color:#55636F">NĐ 254 &amp; TT 91 thi hành. Đồng thời NĐ 123/2020, NĐ 70/2025 và TT 32/2025 hết hiệu lực.</span>
+          </div>
+          <div style="display:grid;gap:2px;padding:13px 0 13px 24px;border-bottom:1px solid #E4E1D8;position:relative">
+            <span style="position:absolute;left:2px;top:19px;width:9px;height:9px;border-radius:50%;background:#8F2A23"></span>
+            <span style="font-weight:700;font-size:13.5px">Từ 01/7/2026 — hóa đơn đặt in</span><span style="font-size:13.5px;color:#55636F">Hóa đơn đặt in của cơ quan thuế hết giá trị sử dụng; số chưa dùng hết phải tiêu hủy theo trình tự tại TT 91.</span>
+          </div>
+          <div style="display:grid;gap:2px;padding:13px 0 4px 24px;position:relative">
+            <span style="position:absolute;left:2px;top:19px;width:9px;height:9px;border-radius:50%;background:#8F2A23"></span>
+            <span style="font-weight:700;font-size:13.5px">Không còn hóa đơn giấy tự in / đặt in song song</span><span style="font-size:13.5px;color:#55636F">Chỉ còn hóa đơn điện tử, chứng từ điện tử (trừ số hóa đơn giấy tồn phải xử lý chuyển tiếp).</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ onND }}" hint-placeholder-val="{{ false }}">
+    <section>
+      <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:22px 0 6px">Nội dung điểm mới theo chủ đề</h2>
+      <p style="color:#55636F;font-size:14.5px;margin:0 0 16px;max-width:720px">Bấm để mở từng phần. Thẻ điều khoản ghi nguồn để đối chiếu văn bản gốc khi cần.</p>
+      <sc-for list="{{ secItems }}" as="s" hint-placeholder-count="7">
+        <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);margin-bottom:8px;overflow:hidden">
+          <button type="button" onClick="{{ s.toggle }}" style="width:100%;display:grid;gap:4px;text-align:left;background:#fff;border:none;cursor:pointer;padding:14px 44px 14px 15px;position:relative;color:#16202B;min-height:52px">
+            <span style="font-family:Lora,Georgia,serif;font-weight:700;font-size:15.5px;line-height:1.35">{{ s.n }}</span>
+            <span style="font-size:12.5px;color:#8F2A23;font-weight:600">{{ s.c }}</span>
+            <span style="position:absolute;right:15px;top:15px;font-size:19px;color:#8B96A1">{{ s.sign }}</span>
+          </button>
+          <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}">
+            <div style="border-top:1px solid #E4E1D8;padding:11px 15px 15px;font-size:14.5px;line-height:1.65;color:#2B3744;overflow-wrap:anywhere">{{ s.body }}</div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ onQA }}" hint-placeholder-val="{{ false }}">
+    <section>
+      <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:22px 0 12px">Bộ câu hỏi &ndash; đáp</h2>
+      <div class="noprint" style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+        <button type="button" onClick="{{ onStudy }}" style="{{ studySty }}">{{ studyLabel }}</button>
+        <span style="font-size:13px;color:#8B96A1">{{ qaCount }} câu hỏi</span>
+      </div>
+      <sc-for list="{{ qaItems }}" as="k" hint-placeholder-count="6">
+        <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);margin-bottom:9px;padding:15px 16px">
+          <div style="font-weight:600;font-size:15px;line-height:1.5">{{ k.q }}</div>
+          <sc-if value="{{ k.show }}" hint-placeholder-val="{{ true }}">
+            <div style="font-size:14.5px;color:#55636F;margin-top:9px;line-height:1.62">{{ k.a }}</div>
+          </sc-if>
+          <sc-if value="{{ k.hidden }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:11px">
+              <button type="button" onClick="{{ k.reveal }}" style="font-size:13.5px;font-weight:600;color:#1D6152;background:#E7F1EC;border:1px solid #CFE3DA;border-radius:4px;padding:9px 15px;cursor:pointer" style-hover="background:#D9EBE3">Hiện đáp án</button>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ onTC }}" hint-placeholder-val="{{ false }}">
+    <section>
+      <h2 style="font-family:Lora,Georgia,serif;font-size:clamp(18px,4vw,21px);font-weight:700;margin:22px 0 6px">Tra cứu nhanh</h2>
+      <p style="color:#55636F;font-size:13.5px;margin:0 0 14px">Trên điện thoại có thể trượt ngang từng bảng để xem đủ cột.</p>
+
+      <h3 style="font-family:Lora,Georgia,serif;font-size:14px;font-weight:700;color:#8F2A23;margin:20px 0 9px">Xử lý hóa đơn điện tử lập sai — chọn đúng cách</h3>
+      <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);overflow-x:auto">
+        <table style="font-size:13.5px;min-width:560px">
+          <thead><tr><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Tình huống</th><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Cách xử lý</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Sai tên, địa chỉ, tiền bằng chữ hoặc nội dung khác — <b style="color:#8F2A23">KHÔNG</b> sai MST, số tiền, thuế suất, tiền thuế, hàng hóa</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chỉ <b style="color:#8F2A23">thông báo</b> cho người mua &amp; cơ quan thuế theo <b style="color:#8F2A23">Mẫu 04/SS-HĐĐT</b>. Không phải lập lại hóa đơn. <span style="display:inline-block;font-size:11.5px;font-weight:600;color:#55636F;background:#F2F1EB;border:1px solid #E4E1D8;border-radius:3px;padding:1px 7px;white-space:nowrap">Điều 10 TT 91</span></td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Các sai sót khác</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Lập hóa đơn <b style="color:#8F2A23">điều chỉnh</b> hoặc <b style="color:#8F2A23">thay thế</b>.</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Hóa đơn từ máy tính tiền; hoặc hóa đơn bán tài sản phải đăng ký quyền sở hữu/sử dụng</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top"><b style="color:#8F2A23">Bắt buộc lập hóa đơn thay thế</b> (không được điều chỉnh) — trừ trả lại hàng đã đăng ký theo tên người mua. <span style="display:inline-block;font-size:11.5px;font-weight:600;color:#55636F;background:#F2F1EB;border:1px solid #E4E1D8;border-radius:3px;padding:1px 7px;white-space:nowrap">Điều 10 TT 91</span></td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chuyển dữ liệu theo Bảng tổng hợp / Bảng TTGD; mua bán trên nền tảng TMĐT</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Không bắt buộc lập văn bản thỏa thuận trước khi điều chỉnh/thay thế. <span style="display:inline-block;font-size:11.5px;font-weight:600;color:#55636F;background:#F2F1EB;border:1px solid #E4E1D8;border-radius:3px;padding:1px 7px;white-space:nowrap">Điều 16 NĐ 254</span></td></tr>
+            <tr><td style="padding:11px 14px;vertical-align:top">Chứng từ điện tử sai (không sai MST, số tiền)</td><td style="padding:11px 14px;vertical-align:top">Thông báo theo <b style="color:#8F2A23">Mẫu 04/SS-CTĐT</b>, không lập lại; sai khác thì lập chứng từ thay thế. <span style="display:inline-block;font-size:11.5px;font-weight:600;color:#55636F;background:#F2F1EB;border:1px solid #E4E1D8;border-radius:3px;padding:1px 7px;white-space:nowrap">Điều 20 TT 91</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-family:Lora,Georgia,serif;font-size:14px;font-weight:700;color:#8F2A23;margin:24px 0 9px">Mốc thời gian / thời hạn</h3>
+      <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);overflow-x:auto">
+        <table style="font-size:13.5px;min-width:600px">
+          <thead><tr><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Nội dung</th><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Thời hạn</th><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Căn cứ</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Giải trình, bổ sung hồ sơ đăng ký / thay đổi ĐK khi CQT yêu cầu</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top"><b style="color:#8F2A23">03 ngày làm việc</b> (trước là 02)</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Điều 6 TT 91</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Bổ sung thông tin ĐKT khớp CSDL dân cư (MST cấp trước 01/7/2025)</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top"><b style="color:#8F2A23">10 ngày làm việc</b>; quá hạn → tạm ngừng HĐĐT</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Điều 8 TT 91</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Lập hóa đơn theo kỳ cho dịch vụ cần đối soát</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chậm nhất <b style="color:#8F2A23">ngày 07</b> tháng sau, hoặc <b style="color:#8F2A23">07 ngày</b> sau kỳ quy ước</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Điều 9 NĐ 254</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Sản phẩm, dịch vụ về dữ liệu cần đối soát</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chậm nhất <b style="color:#8F2A23">02 tháng</b> kể từ tháng phát sinh</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Điều 9 NĐ 254</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Giao dịch ban đêm, người bán không có phần mềm tự động</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Chậm nhất <b style="color:#8F2A23">ngày làm việc tiếp theo</b></td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Điều 9 NĐ 254</td></tr>
+            <tr><td style="padding:11px 14px;vertical-align:top">Truyền dữ liệu chứng từ điện tử sau sự cố kỹ thuật</td><td style="padding:11px 14px;vertical-align:top">Trong <b style="color:#8F2A23">03 ngày làm việc</b> sau khi khắc phục</td><td style="padding:11px 14px;vertical-align:top">Điều 27 NĐ 254</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-family:Lora,Georgia,serif;font-size:14px;font-weight:700;color:#8F2A23;margin:24px 0 9px">Ngưỡng &amp; con số</h3>
+      <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);overflow-x:auto">
+        <table style="font-size:13.5px;min-width:600px">
+          <thead><tr><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Nội dung</th><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Ngưỡng / mức</th><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Căn cứ</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">HKD, cá nhân KD bắt buộc HĐĐT có mã / từ máy tính tiền có kết nối dữ liệu</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Doanh thu năm <b style="color:#8F2A23">trên 01 tỷ đồng</b>, hoặc bán tài sản phải đăng ký quyền SH/SD</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Điều 6 NĐ 254</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Khen thưởng người tố giác hành vi không lập, không giao hóa đơn</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top"><b style="color:#8F2A23">≤ 10%</b> tiền phạt/vụ, tối đa <b style="color:#8F2A23">10.000.000đ</b>/vụ</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Điều 41 NĐ 254</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Kinh phí biện pháp khuyến khích (Hóa đơn may mắn…)</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Không quá <b style="color:#8F2A23">150 tỷ đồng/năm</b></td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Điều 13 TT 91</td></tr>
+            <tr><td style="padding:11px 14px;vertical-align:top">Miễn phí dịch vụ chứng từ điện tử</td><td style="padding:11px 14px;vertical-align:top">HKD, cá nhân KD dùng <b style="color:#8F2A23">dưới 10 lao động</b> &amp; không thuộc diện dùng HĐĐT</td><td style="padding:11px 14px;vertical-align:top">Điều 28 NĐ 254</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-family:Lora,Georgia,serif;font-size:14px;font-weight:700;color:#8F2A23;margin:24px 0 9px">Biểu mẫu thường dùng (Phụ lục III TT 91)</h3>
+      <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);overflow-x:auto">
+        <table style="font-size:13.5px;min-width:480px">
+          <thead><tr><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Mẫu số</th><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Dùng cho</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top"><b>01/ĐKTĐ-HĐĐT</b></td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Đăng ký / thay đổi nội dung ĐK sử dụng HĐĐT; thông báo danh sách HKD ủy nhiệm</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top"><b>04/SS-HĐĐT</b></td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Thông báo hóa đơn điện tử đã lập sai</td></tr>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top"><b>01/TTGD</b></td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8;vertical-align:top">Bảng thông tin chi tiết giao dịch (dịch vụ cho cá nhân người tiêu dùng)</td></tr>
+            <tr><td style="padding:11px 14px;vertical-align:top"><b>04/SS-CTĐT</b></td><td style="padding:11px 14px;vertical-align:top">Thông báo chứng từ điện tử đã lập sai</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-family:Lora,Georgia,serif;font-size:14px;font-weight:700;color:#8F2A23;margin:24px 0 9px">Văn bản thay thế</h3>
+      <div style="background:#fff;border:1px solid #E4E1D8;border-radius:4px;box-shadow:0 1px 2px rgba(22,32,43,.04);overflow-x:auto">
+        <table style="font-size:13.5px;min-width:480px">
+          <thead><tr><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Văn bản mới (từ 01/7/2026)</th><th style="text-align:left;padding:11px 14px;background:#F7F6F1;border-bottom:1px solid #E4E1D8;font-size:12.5px">Thay thế / hết hiệu lực</th></tr></thead>
+          <tbody>
+            <tr><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8">NĐ 254/2026/NĐ-CP</td><td style="padding:11px 14px;border-bottom:1px solid #E4E1D8">NĐ 123/2020/NĐ-CP &amp; NĐ 70/2025/NĐ-CP</td></tr>
+            <tr><td style="padding:11px 14px">TT 91/2026/TT-BTC</td><td style="padding:11px 14px">TT 32/2025/TT-BTC</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </sc-if>
+
+  <footer style="margin-top:30px;padding:16px 18px;background:#FAF8F1;border:1px solid #E4E1D8;border-left:3px solid #9A7A2E;border-radius:4px;font-size:12.5px;color:#55636F;line-height:1.7">
+    <b style="color:#16202B">Lưu ý sử dụng.</b> Thư viện tra cứu &amp; học tập nội bộ. Toàn văn được trích trực tiếp từ file gốc; phần chuyên đề hóa đơn điện tử biên soạn lại từ tài liệu tuyên truyền của cơ quan thuế. Việc xác định nghĩa vụ cụ thể phải căn cứ bản gốc từng văn bản (link nguồn trong mỗi văn bản), pháp luật thuế chuyên ngành và hồ sơ thực tế. Nội dung sửa ở tab &ldquo;Nguồn văn bản&rdquo; chỉ lưu trên máy bạn, không thay đổi bản gốc.
+  </footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;lib&quot;,&quot;tq&quot;,&quot;nd&quot;,&quot;qa&quot;,&quot;tc&quot;,&quot;src&quot;],&quot;default&quot;:&quot;lib&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hành vi&quot;},&quot;studyDefault&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hành vi&quot;},&quot;showSourcesTab&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hành vi&quot;}}">
+const KEY = 'tvpl-nguon-v1';
+const ACC = {a:'aàáảãạâầấẩẫậăằắẳẵặ',e:'eèéẻẽẹêềếểễệ',i:'iìíỉĩị',o:'oòóỏõọôồốổỗộơờớởỡợ',u:'uùúủũụưừứửữự',y:'yỳýỷỹỵ',d:'dđ'};
+const strip = s => (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase();
+const plain = h => (h||'').replace(/<[^>]+>/g,'').replace(/&[a-z]+;/g,' ');
+const esc = s => (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const CITE = 'display:inline-block;font-size:11.5px;font-weight:600;color:#55636F;background:#F2F1EB;border:1px solid #E4E1D8;border-radius:3px;padding:1px 7px;white-space:nowrap';
+const STATUS = {
+  'Còn hiệu lực': 'color:#1D6152;background:#E7F1EC;border:1px solid #CFE3DA',
+  'Chưa hiệu lực': 'color:#9A7A2E;background:#FAF4E4;border:1px solid #EADFC0',
+  'Hết hiệu lực': 'color:#8F2A23;background:#FBF1F0;border:1px solid #E9CFCC',
+  'Dự thảo': 'color:#55636F;background:#F2F1EB;border:1px solid #E4E1D8'
+};
+const PILL = (on) => ({fontSize: '12.5px', fontWeight: 600, color: on ? '#fff' : '#55636F', background: on ? '#16202B' : '#fff', border: '1px solid ' + (on ? '#16202B' : '#D6D2C7'), borderRadius: '999px', padding: '7px 13px', cursor: 'pointer', whiteSpace: 'nowrap'});
+
+class Component extends DCLogic {
+  state = {
+    tab: null, q: '', doc: null, situ: 'all', study: null,
+    open: {}, secOpen: {}, rev: {}, expand: {}, sf: 'all',
+    ov: {}, added: [], hid: {},
+    edit: null, ef: null, adding: false,
+    nf: {sohieu:'', kind:'Nghị định', title:'', url:'', eff:'', status:'Còn hiệu lực', text:''},
+    msg: ''
+  };
+
+  componentDidMount() {
+    this.full = {}; this.loading = {};
+    try {
+      const s = JSON.parse(localStorage.getItem(KEY) || '{}');
+      this.setState({ov: s.ov || {}, added: (s.added || []).map(d => this.prepDoc(d)), hid: s.hid || {}});
+    } catch (e) {}
+    import('./data/index.js').then(m => { this.META = m.META; this.ORDER = m.ORDER; this.SITU = m.SITU; this.forceUpdate(); });
+    import('./data/hddt.js').then(m => { this.SEC = m.sections; this.QA = m.qa; this.forceUpdate(); });
+  }
+
+  prepDoc(d) {
+    (d.arts || []).forEach(a => { a._h = strip('Điều ' + a.no + '. ' + a.t + ' ' + ((a.b || []).join(' ')) + ' ' + (a.ct || '')); });
+    d._plh = strip((d.pl || []).join(' '));
+    return d;
+  }
+
+  loadDoc(code) {
+    if (!this.full || this.full[code] || this.loading[code]) return;
+    this.loading[code] = true;
+    import('./data/docs/' + code + '.js')
+      .then(m => { this.full[code] = this.prepDoc(Object.assign({}, m.doc)); this.forceUpdate(); })
+      .catch(() => { this.loading[code] = false; });
+  }
+  loadAll() { (this.ORDER || []).forEach(c => this.loadDoc(c)); }
+  loadedCount() { return (this.ORDER || []).filter(c => this.full && this.full[c]).length; }
+  allLoaded() { const o = this.ORDER || []; return o.length > 0 && this.loadedCount() === o.length; }
+
+  persist(patch) {
+    const next = Object.assign({ov: this.state.ov, added: this.state.added, hid: this.state.hid}, patch);
+    this.setState(patch);
+    try {
+      localStorage.setItem(KEY, JSON.stringify({
+        ov: next.ov,
+        added: next.added.map(d => ({code: d.code, kind: d.kind, sohieu: d.sohieu, title: d.title, url: d.url, eff: d.eff, status: d.status, amendedBy: d.amendedBy, note: d.note, checked: d.checked, arts: (d.arts || []).map(a => ({no: a.no, t: a.t, c: a.c, ct: a.ct, b: a.b, g: a.g})), ch: d.ch || [], pl: d.pl || [], custom: true})),
+        hid: next.hid
+      }));
+    } catch (e) {}
+  }
+
+  rich(html) { return React.createElement('span', {dangerouslySetInnerHTML: {__html: html}}); }
+
+  hl(html, q) {
+    if (!q || !q.trim()) return html;
+    let pat = '';
+    for (const ch of strip(q.trim())) {
+      if (ACC[ch]) pat += '[' + ACC[ch] + ACC[ch].toUpperCase() + ']';
+      else if (/[a-z0-9]/.test(ch)) pat += ch;
+      else if (ch === ' ') pat += '\\s+';
+      else pat += ch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+    let re; try { re = new RegExp('(' + pat + ')', 'gi'); } catch (e) { return html; }
+    return ('>' + html + '<').replace(/>([^<]+)</g, (m, t) => '>' + t.replace(re, '<mark>$1</mark>') + '<').slice(1, -1);
+  }
+
+  match(hay, q) { return strip(hay).includes(strip(q.trim())); }
+
+  docs() {
+    const out = [];
+    if (this.META) (this.ORDER || []).forEach(code => {
+      const m = this.META[code], o = this.state.ov[code] || {};
+      out.push(Object.assign({code: code, arts: [], pl: []}, m, this.full[code] || {},
+        {eff: '01/7/2026', status: 'Còn hiệu lực'}, o,
+        {nArts: m.nArts, _edited: Object.keys(o).length > 0, _loaded: !!this.full[code]}));
+    });
+    this.state.added.forEach(d => out.push(Object.assign({}, d, {nArts: (d.arts || []).length, _custom: true, _loaded: true, _edited: false})));
+    return out.filter(d => !this.state.hid[d.code]);
+  }
+
+  parseText(text) {
+    const lines = (text || '').split(/\n+/).map(s => s.trim()).filter(Boolean);
+    const arts = []; let cur = null;
+    lines.forEach(l => {
+      const m = l.match(/^Điều\s+([0-9]+[a-zA-Z]?)\s*[.:\-–]?\s*(.*)$/);
+      if (m) { cur = {no: m[1], t: m[2] || '', c: '', ct: '', b: [], g: []}; arts.push(cur); }
+      else if (cur) cur.b.push(esc(l));
+      else { cur = {no: '—', t: 'Nội dung', c: '', ct: '', b: [esc(l)], g: []}; arts.push(cur); }
+    });
+    return arts;
+  }
+
+  today() { const d = new Date(); const p = n => String(n).padStart(2, '0'); return p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + d.getFullYear(); }
+  flash(m) { this.setState({msg: m}); clearTimeout(this._t); this._t = setTimeout(() => this.setState({msg: ''}), 4000); }
+
+  startEdit(d) {
+    if (this.state.edit === d.code) return this.setState({edit: null, ef: null});
+    this.setState({edit: d.code, ef: {sohieu: d.sohieu || '', title: d.title || '', url: d.url || '', eff: d.eff || '', status: d.status || 'Còn hiệu lực', amendedBy: d.amendedBy || '', note: d.note || ''}});
+  }
+  saveEdit() {
+    const code = this.state.edit, f = this.state.ef; if (!code) return;
+    const custom = this.state.added.some(d => d.code === code);
+    if (custom) this.persist({added: this.state.added.map(d => d.code === code ? Object.assign({}, d, f) : d), edit: null, ef: null});
+    else this.persist({ov: Object.assign({}, this.state.ov, {[code]: Object.assign({}, this.state.ov[code] || {}, f)}), edit: null, ef: null});
+    this.flash('Đã lưu thay đổi cho ' + f.sohieu + '.');
+  }
+  markChecked(d) {
+    const f = {checked: this.today()};
+    if (d._custom) this.persist({added: this.state.added.map(x => x.code === d.code ? Object.assign({}, x, f) : x)});
+    else this.persist({ov: Object.assign({}, this.state.ov, {[d.code]: Object.assign({}, this.state.ov[d.code] || {}, f)})});
+    this.flash('Đã ghi nhận đối chiếu ' + d.sohieu + ' ngày ' + f.checked + '.');
+  }
+  second(d) {
+    if (d._custom) { this.persist({added: this.state.added.filter(x => x.code !== d.code), edit: null}); this.flash('Đã xóa ' + d.sohieu + '.'); return; }
+    const ov = Object.assign({}, this.state.ov); delete ov[d.code];
+    this.persist({ov, edit: null}); this.flash('Đã hoàn nguyên ' + this.META[d.code].sohieu + '.');
+  }
+  addSave() {
+    const f = this.state.nf;
+    if (!f.sohieu.trim()) return this.flash('Cần nhập số hiệu văn bản.');
+    const doc = this.prepDoc({code: 'u' + Date.now(), kind: f.kind, sohieu: f.sohieu.trim(), title: f.title.trim(), url: f.url.trim(), eff: f.eff.trim() || '—', status: f.status, amendedBy: '', note: '', arts: this.parseText(f.text), ch: [], pl: [], custom: true});
+    this.persist({added: this.state.added.concat([doc]), adding: false, nf: {sohieu:'', kind:'Nghị định', title:'', url:'', eff:'', status:'Còn hiệu lực', text:''}});
+    this.flash('Đã thêm ' + doc.sohieu + ' (' + doc.arts.length + ' điều).');
+  }
+  exportJSON() {
+    const blob = new Blob([JSON.stringify({ov: this.state.ov, added: this.state.added, hid: this.state.hid}, null, 1)], {type: 'application/json'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'cap-nhat-nguon-van-ban.json'; a.click();
+    this.flash('Đã xuất file cập nhật.');
+  }
+  importJSON() {
+    const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json';
+    inp.onchange = () => { const f = inp.files[0]; if (!f) return; const r = new FileReader();
+      r.onload = () => { try { const s = JSON.parse(r.result); this.persist({ov: s.ov || {}, added: (s.added || []).map(d => this.prepDoc(d)), hid: s.hid || {}}); this.flash('Đã nhập bản cập nhật.'); } catch (e) { this.flash('File không đọc được.'); } };
+      r.readAsText(f); };
+    inp.click();
+  }
+  resetAll() { this.persist({ov: {}, added: [], hid: {}, edit: null, ef: null}); this.flash('Đã hoàn nguyên toàn bộ về bản gốc.'); }
+
+  sfChips(docs) {
+    const sf = this.state.sf || 'all';
+    const mk = (c, l) => ({key: c, label: l, sty: PILL(sf === c), go: () => this.setState({sf: c})});
+    return [mk('all', 'Tất cả'), mk('hddt', 'Chuyên đề HĐĐT')].concat(docs.map(d => mk(d.code, d.sohieu)));
+  }
+
+  search(q) {
+    const st = this.state, sf = st.sf || 'all';
+    const groups = []; let count = 0;
+    if (sf === 'all' || sf === 'hddt') {
+      (this.SEC || []).forEach(s => {
+        const hits = s.items.filter(it => this.match(plain(it[0]) + ' ' + (it[1] || ''), q));
+        if (hits.length) { count += hits.length;
+          groups.push({key: 'nd' + s.n, title: 'Điểm mới · ' + s.n, items: hits.map((it, i) => ({key: i, head: this.rich(this.hl(it[0], q)), body: it[1] ? this.rich('<span style="' + CITE + '">' + this.hl(it[1], q) + '</span>') : ''})), more: false});
+        }
+      });
+      const qh = [];
+      (this.QA || []).forEach((it, i) => {
+        if (this.match(it[0] + ' ' + plain(it[1]) + ' ' + (it[2] || ''), q)) { count++;
+          qh.push({key: i, head: this.rich('<span style="color:#8F2A23;font-family:Lora,serif;margin-right:7px">Câu ' + (i + 1) + '.</span>' + this.hl(it[0], q)), body: this.rich(this.hl(it[1], q) + (it[2] ? ' <span style="' + CITE + '">' + this.hl(it[2], q) + '</span>' : ''))});
+        }
+      });
+      if (qh.length) groups.push({key: 'qa', title: 'Hỏi – Đáp', items: qh, more: false});
+    }
+    const nq = strip(q);
+    this.docs().forEach(d => {
+      if (sf !== 'all' && sf !== d.code) return;
+      if (!d._loaded) return;
+      const items = [];
+      (d.arts || []).forEach(a => { if (a._h && a._h.includes(nq)) {
+        items.push({key: a.no, head: this.rich('<span style="color:#8F2A23;font-family:Lora,serif;margin-right:7px">Điều ' + a.no + '.</span>' + this.hl(a.t, q)), body: this.rich((a.b || []).map(c => this.hl(c, q)).join('<br>'))});
+      }});
+      if (d._plh && nq && d._plh.includes(nq)) items.push({key: 'pl', head: this.rich('Phụ lục — ' + d.sohieu), body: this.rich(this.hl((d.pl || []).join('<br>'), q))});
+      if (items.length) {
+        count += items.length;
+        const cap = st.expand[d.code] ? items.length : 12;
+        groups.push({key: d.code, title: d.sohieu + ' — ' + d.title + ' (' + items.length + ')', items: items.slice(0, cap),
+          more: items.length > cap, moreLabel: 'Xem thêm ' + (items.length - cap) + ' điều',
+          onMore: () => this.setState({expand: Object.assign({}, st.expand, {[d.code]: true})})});
+      }
+    });
+    return {groups, count};
+  }
+
+  tabSty(id, tab) {
+    const on = id === tab;
+    return {whiteSpace: 'nowrap', fontSize: '14px', fontWeight: 600, color: on ? '#16202B' : '#7A8792', background: 'none', border: 'none', borderBottom: '2px solid ' + (on ? '#8F2A23' : 'transparent'), padding: '10px 12px', cursor: 'pointer'};
+  }
+
+  renderVals() {
+    const st = this.state;
+    const tab = st.tab || this.props.defaultTab || 'lib';
+    const study = st.study === null ? !!this.props.studyDefault : st.study;
+    const q = st.q, searching = !!q.trim();
+    const docs = this.docs();
+    const showSrc = this.props.showSourcesTab !== false;
+
+    const tabDefs = [['lib', 'Thư viện toàn văn (' + (docs.length || 11) + ')'], ['tq', 'Tổng quan'], ['nd', 'Điểm mới'], ['qa', 'Hỏi–Đáp'], ['tc', 'Tra cứu']];
+    if (showSrc) tabDefs.push(['src', 'Nguồn văn bản']);
+
+    if (searching) this.loadAll();
+    const res = searching ? this.search(q) : {groups: [], count: 0};
+
+    const cur = st.doc ? docs.find(d => d.code === st.doc) : null;
+    const rows = [];
+    if (cur) {
+      let ch = null;
+      (cur.arts || []).forEach(a => {
+        if (a.c !== ch) { ch = a.c; const c = (cur.ch || []).find(x => x.ro === a.c);
+          if (a.c) rows.push({key: 'c' + a.c, isChap: true, isArt: false, label: 'Chương ' + a.c + (c && c.t ? '. ' + c.t : '')}); }
+        if (st.situ !== 'all' && !(a.g || []).includes(st.situ)) return;
+        const k = cur.code + ':' + a.no, open = !!st.open[k];
+        rows.push({key: k, isChap: false, isArt: true, label: 'Điều ' + a.no + '. ' + a.t,
+          tags: (a.g || []).map(t => (this.SITU && Object.fromEntries(this.SITU)[t]) || t), hasTags: (a.g || []).length > 0,
+          open, sign: open ? '–' : '+',
+          body: open ? this.rich((a.b || []).length ? (a.b || []).map(c => '<div style="margin:9px 0">' + c + '</div>').join('') : '<div style="color:#8B96A1">(Không có nội dung khoản — xem tiêu đề điều.)</div>') : null,
+          toggle: () => this.setState({open: Object.assign({}, st.open, {[k]: !st.open[k]})})});
+      });
+      if ((cur.pl || []).length) {
+        const k = cur.code + ':pl', open = !!st.open[k];
+        rows.push({key: 'plc', isChap: true, isArt: false, label: 'Phụ lục'});
+        rows.push({key: k, isChap: false, isArt: true, label: 'Phụ lục (trích nội dung)', tags: [], hasTags: false, open, sign: open ? '–' : '+',
+          body: open ? this.rich(cur.pl.map(p => '<div style="margin:9px 0">' + p + '</div>').join('') + '<div style="color:#8B96A1;font-size:12.5px;margin-top:8px">Biểu mẫu chi tiết xem file gốc tại nguồn.</div>') : null,
+          toggle: () => this.setState({open: Object.assign({}, st.open, {[k]: !st.open[k]})})});
+      }
+    }
+
+    const kinds = ['Luật', 'Nghị định', 'Thông tư', 'Văn bản hợp nhất', 'Văn bản khác'];
+    const groups = kinds.map(k => ({key: k, kind: k, docs: docs.filter(d => d.kind === k).map(d => ({
+      key: d.code, sohieu: d.sohieu, title: d.title, badge: d.status, badgeSty: (STATUS[d.status] || STATUS['Dự thảo']) + ';font-size:11px;font-weight:600;border-radius:3px;padding:1px 7px',
+      meta: ((d.ch || []).length ? (d.ch || []).length + ' chương · ' : '') + d.nArts + ' điều · hiệu lực ' + d.eff,
+      open: () => { this.loadDoc(d.code); this.setState({doc: d.code, situ: 'all'}); window.scrollTo({top: 0}); }
+    }))})).filter(g => g.docs.length);
+
+    const situChips = this.SITU && cur && (cur.code === 'nd254' || cur.code === 'tt91')
+      ? [['all', 'Tất cả']].concat(this.SITU).map(([c, l]) => ({key: c, label: l, sty: PILL(st.situ === c), go: () => this.setState({situ: c})})) : [];
+
+    const secItems = (this.SEC || []).map((s, i) => {
+      const open = !!st.secOpen[i];
+      return {key: i, n: s.n, c: s.c, open, sign: open ? '–' : '+',
+        body: open ? this.rich('<ul style="margin:6px 0;padding-left:19px">' + s.items.map(it => '<li style="margin:8px 0">' + it[0] + (it[1] ? ' <span style="' + CITE + '">' + it[1] + '</span>' : '') + '</li>').join('') + '</ul>') : null,
+        toggle: () => this.setState({secOpen: Object.assign({}, st.secOpen, {[i]: !st.secOpen[i]})})};
+    });
+
+    const qaItems = (this.QA || []).map((it, i) => {
+      const shown = !study || st.rev[i];
+      return {key: i, q: this.rich('<span style="color:#8F2A23;font-family:Lora,serif;margin-right:7px">Câu ' + (i + 1) + '.</span>' + it[0]),
+        a: shown ? this.rich(it[1] + (it[2] ? ' <span style="' + CITE + '">' + it[2] + '</span>' : '')) : null,
+        show: shown, hidden: !shown, reveal: () => this.setState({rev: Object.assign({}, st.rev, {[i]: true})})};
+    });
+
+    const srcRows = docs.map(d => ({
+      key: d.code, sohieu: d.sohieu, title: d.title, url: d.url, hasUrl: !!d.url, eff: d.eff,
+      badge: d.status, badgeSty: (STATUS[d.status] || STATUS['Dự thảo']) + ';font-size:11px;font-weight:600;border-radius:3px;padding:1px 7px',
+      meta: d.nArts + ' điều', edited: !!d._edited, custom: !!d._custom,
+      note: d.note || '', hasNote: !!(d.note && String(d.note).trim()),
+      amendedBy: d.amendedBy || '', hasAmended: !!(d.amendedBy && String(d.amendedBy).trim()),
+      checkedLabel: d.checked ? 'Đã đối chiếu bản gốc: ' + d.checked : 'Chưa ghi nhận lần đối chiếu nào',
+      editing: st.edit === d.code, editLabel: st.edit === d.code ? 'Đóng' : 'Sửa thông tin',
+      secondLabel: d._custom ? 'Xóa' : 'Hoàn nguyên',
+      onEdit: () => this.startEdit(d), onCheck: () => this.markChecked(d), onSecond: () => this.second(d)
+    }));
+
+    const mk = (obj, key, field) => e => this.setState({[key]: Object.assign({}, obj, {[field]: e.target.value})});
+    const ef = st.ef || {sohieu: '', title: '', url: '', eff: '', status: 'Còn hiệu lực', amendedBy: '', note: ''};
+    const efH = {}; ['sohieu', 'title', 'url', 'eff', 'status', 'amendedBy', 'note'].forEach(f => efH[f] = mk(ef, 'ef', f));
+    const nfH = {}; ['sohieu', 'kind', 'title', 'url', 'eff', 'status', 'text'].forEach(f => nfH[f] = mk(st.nf, 'nf', f));
+
+    return {
+      q, searching, onQ: e => this.setState({q: e.target.value}), onClear: () => this.setState({q: '', sf: 'all'}),
+      tabs: tabDefs.map(([id, label]) => ({key: id, label, sty: this.tabSty(id, tab), go: () => { this.setState({tab: id, q: ''}); window.scrollTo({top: 0}); }})),
+      onLib: !searching && tab === 'lib', onTQ: !searching && tab === 'tq', onND: !searching && tab === 'nd',
+      onQA: !searching && tab === 'qa', onTC: !searching && tab === 'tc', onSrc: !searching && tab === 'src',
+      docCount: docs.length || 11, artCount: docs.reduce((n, d) => n + (d.nArts || 0), 0) || 500,
+      results: res.groups, hitCount: res.count, noHits: searching && res.count === 0 && this.allLoaded(),
+      searchLoading: searching && !this.allLoaded(),
+      loadNote: 'Đang nạp toàn văn… ' + this.loadedCount() + '/' + ((this.ORDER || []).length || 11) + ' văn bản',
+      sfChips: this.sfChips(docs),
+      groups, noDoc: !cur, hasDoc: !!cur, rows, situChips,
+      cur: cur ? {sohieu: cur.sohieu, title: cur.title, url: cur.url, hasUrl: !!cur.url, showChips: situChips.length > 0,
+        loading: !cur._loaded,
+        meta: ((cur.ch || []).length ? (cur.ch || []).length + ' chương · ' : '') + cur.nArts + ' điều · hiệu lực ' + cur.eff + ' · ' + cur.status} : null,
+      backToList: () => this.setState({doc: null}),
+      secItems, qaItems, qaCount: (this.QA || []).length,
+      studyLabel: study ? 'Chế độ ôn tập: ĐANG BẬT (ẩn đáp án)' : 'Chế độ ôn tập: tắt',
+      studySty: {fontSize: '13.5px', fontWeight: 600, color: study ? '#fff' : '#55636F', background: study ? '#1D6152' : '#fff', border: '1px solid ' + (study ? '#1D6152' : '#D6D2C7'), borderRadius: '4px', padding: '10px 15px', cursor: 'pointer'},
+      onStudy: () => this.setState({study: !study, rev: {}}),
+      srcRows, ef, efH, nf: st.nf, nfH, adding: st.adding,
+      onAdd: () => this.setState({adding: !st.adding}), onAddCancel: () => this.setState({adding: false}),
+      onAddSave: () => this.addSave(), onEditSave: () => this.saveEdit(), onEditCancel: () => this.setState({edit: null, ef: null}),
+      onExport: () => this.exportJSON(), onImport: () => this.importJSON(), onResetAll: () => this.resetAll(),
+      msg: st.msg, hasMsg: !!st.msg
+    };
+  }
+}
+</script>
+</body>
+</html>
