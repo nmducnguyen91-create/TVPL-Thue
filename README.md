@@ -1,25 +1,30 @@
-# Thư viện Pháp luật Thuế 2025–2026
+# TVPL Thuế — Thư viện Pháp luật Thuế 2025–2026
 
-Trang tra cứu & học tập tĩnh (HTML thuần, không cần server, không cần Firebase).
+Trang tra cứu & học tập tĩnh: Luật Quản lý thuế 108/2025/QH15 cùng toàn bộ nghị
+định, thông tư và văn bản hợp nhất hướng dẫn (hiệu lực 01/7/2026).
+11 văn bản · 509 điều toàn văn · chuyên đề Hóa đơn điện tử (điểm mới, hỏi–đáp).
 
-## Cách up lên GitHub Pages
-
-1. Tạo repo mới, giải nén và đẩy **toàn bộ** các file sau lên nhánh `main`:
+## Cấu trúc
 
 ```
-index.html          ← trang chính (bản copy để chạy trên web)
-support.js          ← runtime, bắt buộc
-data/index.js       ← danh mục 11 văn bản (nhẹ, nạp ngay)
-data/docs/*.js      ← toàn văn từng văn bản (nạp khi mở)
-data/hddt.js        ← chuyên đề hóa đơn điện tử (điểm mới, hỏi–đáp)
+index.html        ← trang chính
+support.js        ← runtime (bắt buộc, cùng thư mục index.html)
+vendor/           ← React, ReactDOM, Babel (nhúng sẵn — KHÔNG phụ thuộc CDN ngoài)
+data/index.js     ← danh mục 11 văn bản
+data/hddt.js      ← chuyên đề hóa đơn điện tử
+data/docs/*.js    ← toàn văn từng văn bản (nạp khi mở)
 ```
 
-2. Vào **Settings → Pages**, chọn `Deploy from a branch` → branch `main`, folder `/ (root)` → Save.
-3. Vài phút sau truy cập `https://<tên-tài-khoản>.github.io/<tên-repo>/`.
+Các thư viện React/Babel đã được đặt trong `vendor/` và trang tự nạp từ đó, nên
+**không cần Internet tới CDN ngoài** — chạy ổn định kể cả khi mạng chặn unpkg.
 
-## Lưu ý
+## GitHub Pages
 
-- Phải chạy qua http/https (GitHub Pages là đủ). Mở trực tiếp bằng `file://` sẽ không nạp được dữ liệu.
-- Không cần Firebase: toàn văn nằm trong `data/`, phần "Nguồn văn bản" người dùng sửa được và lưu trong localStorage của chính máy họ. Chỉ cần Firebase nếu muốn nhiều người sửa và thấy chung một bản cập nhật.
-- Chia sẻ bản cập nhật giữa các máy: tab **Nguồn văn bản → Xuất cập nhật (.json)**, máy khác dùng **Nhập từ .json**.
-- File `Thư viện Pháp luật Thuế.dc.html` là bản gốc để tiếp tục sửa thiết kế; `index.html` là bản copy dùng cho hosting. Sửa bản gốc thì copy lại thành `index.html`.
+Settings → Pages → *Deploy from a branch* → branch `main`, thư mục `/ (root)` → Save.
+Địa chỉ: `https://<tài-khoản>.github.io/<tên-repo>/`
+
+## Ghi chú
+
+- Phải chạy qua http/https (GitHub Pages là đủ); mở bằng `file://` có thể không chạy.
+- Tab **Nguồn văn bản**: thêm/sửa danh mục, lưu trong localStorage của máy; có
+  **Xuất/Nhập .json** để đồng bộ giữa các máy. Không đổi bản gốc.
